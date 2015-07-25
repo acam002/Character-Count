@@ -1,0 +1,63 @@
+;  CLASS:       CDA 3103-01   TR 12:45
+;
+;  INSTRUCTOR:  Norman Pestaina  ECS 364
+;
+;  ASSIGNMENT:  #1 LC-3 Machine Code.   DUE Wednesday 07/08
+;
+; CERTIFICATION: I certify that this work is my own and that
+;                 none of it is the work of any other person.
+;
+
+0011000000000000 ;x3200 Beginning Address
+0101010010100000 ;x54A0 Clearing R2
+0010011000100110 ;x2613 Loading data x3100 from location x3015 into R3
+0010101000100111 ;x2A27 Loading data x3200 from location x302B into R5
+1111000000100011 ;xF023 Taking character input from user
+0110001011000000 ;x62C0 Loading ascii number from R3, data in x3100 put into R1
+0001100001111100 ;x187C Checking for the EOT character by subtracting 4
+0000010000001010 ;x040A Branch only when the EOT character was found in the line above
+1001001001111111 ;x927F NOT R1
+0001001001100001 ;x1261 Increment R1 to complete 2'a complement
+0001001001000000 ;x1240 Subtract R0 from R1 and store in R1
+0000101000000011 ;x0A03 Branch when when the desired character was not found
+0111011101000000 ;x7740 Store memory location of the found character into R5
+0001010010100001 ;x14A1 Increment R2, R2 is the character counter
+0001101101100001 ;x1B61 Increment R5 into the next memory address
+0001011011100001 ;x16E1 Increment R3 into the next memory address
+0110001011000000 ;x62C0 Load next character into R1 from R3's memory location
+0000111111110100 ;x0FF4 Unconditional branch to first branch in program
+0010000000000100 ;x2004 Load x30 into R0, '0' in ASCII
+0101101101100000 ;x5B60 Clearing R5, Will be used for the ten's place
+0101110110100000 ;x5DA0 Clearing R6, Will be used for the one's place
+0101100100100000 ;x5920 Clearing R4, Will be used as a temporary register
+0001100010100000 ;x18A0 Copying the contents of R2 into R4
+0000100000000011 ;x0A03 Branch if subtracting ten from R4 yields a negative result
+0001101101100001 ;x1B61 Increment R5 (ten's place if subtracting ten yields a positive or zero result)
+0001100100110110 ;x1936 Subtract 10 from R4
+0000111111111100 ;x0FFC Unconditional branch going back to branch above
+0001101101111111 ;x1B7F Decrementing R5 to correct the counter
+0001100100101010 ;x192A Adding 10 to R4 to correct the running total
+0001110110000100 ;x1D84 Copy R4 into R6 (one's place)
+0101100100100000 ;x5920 Clear R4
+0001100100000010 ;x1902 Copy the contents in R2 into R4
+0001100100110110 ;x1936 Subtract 10 from R4
+0000100000000011 ;x0803 Check for a negative condition code from the line before
+0010000000000111 ;x2007 Load x30 into R0
+0001000000000101 ;x1004 Add the contents of R5 into x30 (R0)
+1111000000100001 ;xF021 Output the contents of R0, which counts ten's place
+0010000000000100 ;x2004 Load x30 into R0
+0001000000000110 ;x1004 Add the counter to R0 to obtain the one's value
+1111000000100001 ;xF021 Output the contents of R0, which counts the number of character occurences
+1111000000100101 ;xF025 HALT the program
+0011000100000000 ;x3100 Contains memory location x3100 for the datum
+0000000000110000 ;x0030 Contains ASCII template x30 = '0'
+0011001000000000 ;x3200 contains memory location x3200 for the datum
+
+
+
+
+
+
+
+
+
